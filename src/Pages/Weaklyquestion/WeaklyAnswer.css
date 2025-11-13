@@ -1,0 +1,58 @@
+.weakly-answer-container {
+    /* max-width: 1500px; */
+    width: 82%;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    margin-top: 70px;
+    margin-left: 240px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.search-input {
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    width: 100%;
+    max-width: 300px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* 🌟 Custom table styles */
+.custom-data-table .rdt_Table {
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.custom-data-table .rdt_TableHead {
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.custom-data-table .rdt_TableHeadRow {
+    font-size: 15px;
+}
+
+.custom-data-table .rdt_TableRow {
+    transition: background-color 0.2s ease-in-out;
+}
+
+.custom-data-table .rdt_TableRow:hover {
+    background-color: #f1f1f1;
+}
+
+/* Custom heading inside th */
+.table-header {
+    font-weight: bold;
+    font-size: 15px;
+    display: block;
+    text-align: center;
+}

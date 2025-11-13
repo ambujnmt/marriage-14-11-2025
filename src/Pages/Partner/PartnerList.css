@@ -1,0 +1,90 @@
+.partner-table-container {
+    padding: 20px;
+    margin-top: 70px;
+    width: 81%;
+    margin-left: 240px;
+    /* margin-top reduced from 70px to 20px */
+}
+
+.partner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.partner-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.partner-table th,
+.partner-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.partner-table img {
+    border-radius: 50%;
+}
+
+.btn {
+    padding: 5px 10px;
+    margin: 2px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.partner-btn-edit {
+    background-color: #6CD8CF !important;
+    color: white !important;
+}
+
+.partner-btn-delete {
+    background-color: #FF7E70 !important;
+    color: white !important;
+    margin-right: 8px;
+}
+
+.custom-pagination {
+    margin-top: 15px !important;
+    text-align: center !important;
+}
+
+.custom-pagination {
+    margin: 0 3px !important;
+    padding: 6px 12px !important;
+    border: 1px solid #ccc !important;
+    background-color: white !important;
+    cursor: pointer !important;
+}
+
+.custom-pagination.active {
+    background-color: #007bff !important;
+    color: white !important;
+    border-color: #007bff !important;
+}
+
+.custom-pagination:disabled {
+    background-color: #eee !important;
+    cursor: not-allowed !important;
+}
+
+.pagination-ellipsis {
+    padding: 6px 12px !important;
+    color: #888 !important;
+}
+
+button {
+    width: unset !important;
+}
+
+.btn-blue {
+    background-color: rgb(58, 206, 206);
+}
+
+.btn-gary {
+    background-color: rgb(191, 201, 201);
+}

@@ -1,0 +1,78 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main container for Result & Analytics page */
+.result-analytics-container {
+    width: 80%;
+    margin: 80px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-left: 250px;
+}
+
+/* Flex container for charts */
+.charts-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+/* Left Section */
+.left-section {
+    flex: 1;
+}
+
+/* Right Section */
+.right-section {
+    flex: 1;
+}
+
+/* Score section */
+.score-section,
+.trends-section,
+.progress-reports-section,
+.week-vs-last-week {
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+/* Trend Items */
+.trends-section {
+    margin-bottom: 50px;
+}
+
+/* Graph Styling */
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Loading state */
+.loading {
+    font-size: 24px;
+    text-align: center;
+    color: #e74c3c;
+    margin-top: 50px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .charts-container {
+        flex-direction: column;
+    }
+
+    .score-section,
+    .trends-section,
+    .progress-reports-section,
+    .week-vs-last-week {
+        margin-bottom: 20px;
+    }
+}

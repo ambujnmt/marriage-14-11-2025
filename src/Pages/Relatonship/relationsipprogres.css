@@ -1,0 +1,95 @@
+.relationship-container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-left: 235px;
+    margin-top: 70px;
+}
+
+h3 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 20px;
+    margin-left: 15px;
+}
+
+.datatable-search-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
+.datatable-search {
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+.react-data-table-component {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow-x: auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.react-data-table-component .rdt_TableRow {
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.loading,
+.error {
+    text-align: center;
+    font-size: 1.2em;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .relationship-container {
+        width: 95%;
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .datatable-search-wrapper {
+        justify-content: center;
+    }
+}
+
+
+/* ✅ Pagination styling */
+.rdt_Pagination {
+    background-color: #f9f9f9 !important;
+    padding: 12px 0;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.rdt_Pagination button {
+    background-color: #fff !important;
+    color: #333 !important;
+    border: 1px solid #ccc !important;
+    border-radius: 6px !important;
+    padding: 6px 14px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s ease-in-out !important;
+}
+
+.rdt_Pagination button:hover:not(:disabled) {
+    background-color: #e6e6e6 !important;
+}
+
+.rdt_Pagination button:disabled {
+    background-color: #f2f2f2 !important;
+    color: #aaa !important;
+    cursor: not-allowed !important;
+}

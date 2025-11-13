@@ -1,0 +1,101 @@
+.rating-container {
+    width: 82%;
+    margin: 80px auto;
+    padding: 20px;
+    margin-left: 240px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.rating-container h1 {
+    font-size: 22px !important;
+    margin-bottom: 15px !important;
+}
+
+.rating-search-input {
+    width: 300px !important;
+    padding: 8px 12px !important;
+    margin-bottom: 20px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    display: block !important;
+    margin-left: 0 !important;
+}
+
+.rating-table-container {
+    overflow-x: auto;
+}
+
+.rating-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-family: Arial, sans-serif !important;
+}
+
+.rating-table th,
+.rating-table td {
+    border: 1px solid #ddd !important;
+    padding: 10px !important;
+    text-align: left !important;
+}
+
+.rating-table th {
+    background-color: #f4f4f4 !important;
+}
+
+.rating-table tr:nth-child(even) {
+    background-color: #f9f9f9 !important;
+}
+
+.rating-table tr:hover {
+    background-color: #f1f1f1 !important;
+}
+
+.rating-edit-btn,
+.rating-delete-btn {
+    padding: 6px 12px !important;
+    margin-right: 5px !important;
+    border: none !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+}
+
+.rating-edit-btn {
+    background-color: #6CD8CF !important;
+    color: #fff !important;
+}
+
+.rating-delete-btn {
+    background-color: #FF7E70 !important;
+    color: #fff !important;
+}
+
+.rating-pagination {
+    margin-top: 15px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    max-width: 240px !important;
+    margin-left: auto !important;
+    /* margin-right: auto !important; */
+}
+
+.rating-pagination button {
+    padding: 6px 12px !important;
+    border: none !important;
+    background-color: #FF7E70 !important;
+    color: white !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+    transition: 0.3s ease !important;
+}
+
+.rating-pagination button:hover:not(:disabled) {
+    background-color: #e86459 !important;
+}
+
+.rating-pagination button:disabled {
+    background-color: #ccc !important;
+    cursor: not-allowed !important;
+}

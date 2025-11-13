@@ -1,0 +1,402 @@
+.daily-checkin-container {
+    width: 85%;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    margin-left: 200px;
+    margin-top: 70px;
+}
+
+.header-check {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.header-check h1 {
+    text-align: center;
+    margin-left: 54px;
+    font-size: 22px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.add-question-button {
+    /* background: linear-gradient(to right, #6CD8CF, #00c6ff) !important; */
+    background-color: #6CD8CF !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 8px 16px !important;
+    border-radius: 5px !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+    transition: background 0.3s ease !important;
+    margin-left: auto !important;
+    width: 20% !important;
+}
+
+/* Table section */
+.question-table-section {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.question-table {
+    width: 98% !important;
+    margin-left: 50px !important;
+    border-collapse: collapse;
+}
+
+.question-table th,
+.question-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+
+
+.question-table th {
+    background-color: #f8f8f8;
+}
+
+/* Status buttons with no hover effects */
+.status-button {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: default;
+    /* change to pointer if clickable */
+    background: none !important;
+    color: inherit !important;
+    border: none !important;
+    outline: none;
+    box-shadow: none;
+    transition: none !important;
+}
+
+/* Active = green */
+.status-button.active {
+    background-color: #d4edda !important;
+    color: #155724 !important;
+    border: 1px solid #c3e6cb !important;
+}
+
+/* Inactive = red */
+.status-button.inactive {
+    background-color: #f8d7da !important;
+    color: #721c24 !important;
+    border: 1px solid #f5c6cb !important;
+}
+
+/* Remove all hover effects */
+.status-button:hover,
+.status-button.active:hover,
+.status-button.inactive:hover {
+    background-color: inherit !important;
+    color: inherit !important;
+    border-color: inherit !important;
+    box-shadow: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    text-decoration: none !important;
+}
+
+/* Edit and Delete buttons */
+/* Edit and Delete buttons */
+.edit-btn,
+.delete-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 500;
+    background: #ddd;
+    /* default grey background */
+    transition: none;
+    /* no hover animation */
+}
+
+
+
+/* Delete button */
+.daily-question-form-delete {
+    background-color: #FF7E70 !important;
+    color: #fff !important;
+    margin-right: 8px;
+}
+
+.actions-cell {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Question Form */
+.question-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.question-form input,
+.question-form select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.daily-question-form {
+    padding: 8px 12px;
+    background-color: #6CD8CF !important;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.question-form button:hover {
+    background-color: #218838;
+}
+
+/* Modal styles */
+.ques-daily-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.ques-daily-modal {
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 8px;
+    width: 40%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.ques-daily-modal h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.ques-daily-modal form input,
+.ques-daily-modal form select {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.ques-daily-modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.ques-daily-modal-buttons button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.ques-daily-modal-buttons button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+}
+
+.ques-daily-modal-buttons button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.modal-buttons button[type="button"] {
+    background-color: #6c757d;
+    color: white;
+}
+
+.ques-daily-modal-buttons button[type="button"]:hover {
+    background-color: #5a6268;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Global button styling excluding .edit-btn, .delete-btn, .status-button */
+button:not(.edit-btn):not(.delete-btn):not(.status-button) {
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+.actions-cell {
+    display: flex;
+    gap: 8px;
+    /* space between buttons */
+    align-items: center;
+    /* vertical align */
+}
+
+
+
+.status-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-right: 4px;
+    color: #fff;
+}
+
+.status-badge.active {
+    background-color: #28a745;
+}
+
+.status-badge.inactive {
+    background-color: #6c757d;
+}
+
+.status-badge.edited {
+    background-color: #17a2b8;
+}
+
+.status-badge.deleted {
+    background-color: #dc3545;
+}
+
+
+/* Header Add Button */
+.header-check {
+    display: flex;
+    justify-content: flex-start;
+    margin: 20px 50px 10px 50px;
+}
+
+/* Controls bar with filter and search */
+.controls-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 50px 20px 50px;
+    flex-wrap: wrap;
+}
+
+/* Items per page dropdown */
+.dailycheck-filter-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.items-per-page-dropdown {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Search */
+.quest-daily-search-container {
+    display: flex;
+    align-items: center;
+    border-radius: 8px 10px !important;
+
+}
+
+.daily-search-input {
+    padding: 8px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 8px 10px !important;
+    width: 250px !important;
+}
+
+/* Add Button */
+.add-question-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.add-question-button:hover {
+    background-color: #218838;
+}
+
+
+.daily-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+}
+
+.daily-pagination-btn {
+    padding: 8px 14px;
+    background-color: #6CD8CF !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-weight: bold !important;
+    min-width: 36px !important;
+    text-align: center !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.daily-pagination-btn:hover {
+    background-color: #6CD8CF !important;
+}
+
+.daily-pagination-btn.active {
+    background-color: white !important;
+    color: #6CD8CF !important;
+    border: 2px solid #6CD8CF !important;
+}
+
+.daily-pagination-arrow {
+    background-color: #e2e6ea !important;
+    color: #333 !important;
+}
+
+.daily-pagination-btn.disabled,
+.daily-pagination-btn.disabled:hover {
+    background-color: #ccc !important;
+    color: #666 !important;
+    cursor: not-allowed !important;
+}

@@ -1,0 +1,121 @@
+/* ===== Sidebar ===== */
+.sidebar {
+  width: 20%; 
+  background: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-right: 1px solid #eee;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  height: 100vh; 
+  overflow-y: auto; 
+}
+
+.sidebar.collapsed {
+  width: 80px; 
+}
+
+.sidebar-logo {
+  width: 120px;
+  transition: all 0.3s ease;
+}
+
+.sidebar.collapsed .sidebar-logo {
+  width: 50px;
+}
+
+.sidebar .nav-link {
+  color: #333;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin: 4px 10px;
+  font-size: 15px;
+  transition: all 0.2s;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #f0f0f0;
+  color: #007bff;
+}
+
+.sidebar .nav-link.active {
+  background-color: #007bff;
+  color: #fff !important;
+}
+
+.sidebar.collapsed .label {
+  display: none;
+}
+
+.sidebar.collapsed .nav-link {
+  justify-content: center;
+}
+
+/* ===== Layout and Content adjustments when sidebar collapses ===== */
+.layout-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  padding-left: 20%; 
+}
+
+/* Adjust content when sidebar is collapsed */
+.layout-container.collapsed .main-content {
+  margin-left: 80px;
+}
+
+/* ===== Main Content ===== */
+.main-content {
+  flex: 1;
+  /* margin-left: 20%; */
+  margin-top: 60px; 
+  /* padding: 20px; */
+  transition: margin-left 0.3s ease;
+}
+
+/* ===== Header Fixed ===== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 20%;
+  right: 0;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  z-index: 1001; 
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+}
+
+
+.header .d-flex {
+  display: flex;
+  align-items: center;
+  gap: 20px; 
+}
+
+.header .btn {
+  margin-right: 20px; 
+}
+
+.header .fs-4 {
+  font-size: 20px;
+}
+
+
+.table > :not(caption) > * > * {
+
+  padding: .1rem !important;
+
+}
+
+.table  th  {
+
+  padding: .5rem !important;
+
+}

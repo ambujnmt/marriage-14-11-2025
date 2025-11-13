@@ -1,0 +1,83 @@
+.leaderboard-container {
+    width: 80%;
+    margin: 70px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* background: #f9f9f9; */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    margin-left: 240px;
+}
+
+.leaderboard-container h1,
+h2 {
+    /* text-align: center; */
+    color: #333 !important;
+    font-size: 18px !important;
+    font-family: sans-serif !important;
+}
+
+.stats-card {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.stat {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px 30px;
+    margin: 10px;
+    flex: 1 1 30%;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.stat h3 {
+    margin-bottom: 12px;
+    color: #555;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.stat p {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #007BFF;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #eaeaea;
+    font-weight: 600;
+    color: #444;
+}
+
+.leaderboard-table thead {
+    background-color: #6CD8CF;
+    color: white;
+}
+
+.leaderboard-table tbody tr:hover {
+    background-color: #f1f9ff;
+}
+
+.loading,
+.error {
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 40px 0;
+    color: #888;
+}
