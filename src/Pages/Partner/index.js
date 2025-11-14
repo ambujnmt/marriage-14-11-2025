@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import axios from "axios";
 import $ from "jquery";
 import "datatables.net-dt/css/dataTables.dataTables.css";
@@ -31,8 +31,8 @@ const Partner = () => {
     upload_photo: null,
   });
 
-  // Fetch Partners
-  const fetchPartners = async () => {
+  // ✅ Fetch Partners
+  const fetchPartners = useCallback(async () => {
     try {
       const { data } = await axios.get(
         "https://site2demo.in/marriageapp/api/partner-list"
@@ -60,17 +60,46 @@ const Partner = () => {
       toast.error("Failed to load users.");
       setPartners([]);
     }
-  };
-
-  useEffect(() => {
-    fetchPartners();
   }, []);
 
-  // Initialize / Update DataTable
+  // ✅ Delete Partner (useCallback added)
+  const deletePartner = useCallback(
+    async (user_id) => {
+      const confirmed = await MySwal.fire({
+        title: "Are you sure?",
+        text: "This user will be permanently deleted!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+      });
+
+      if (!confirmed.isConfirmed) return;
+
+      try {
+        await axios.post(
+          "https://site2demo.in/marriageapp/api/user-delete",
+          { user_id },
+          { headers: { Accept: "application/json" } }
+        );
+        toast.success("User deleted successfully!");
+        await fetchPartners();
+      } catch (error) {
+        console.error("Delete failed:", error);
+        toast.error("Failed to delete user.");
+      }
+    },
+    [fetchPartners]
+  );
+
+  // ✅ Initial Load
+  useEffect(() => {
+    fetchPartners();
+  }, [fetchPartners]);
+
+  // ✅ DataTable Initialization
   useEffect(() => {
     if (!partners || partners.length === 0) return;
 
-    // Destroy previous table if exists
     if ($.fn.DataTable.isDataTable(tableRef.current)) {
       dataTableInstance.current.destroy();
       $(tableRef.current).empty();
@@ -102,11 +131,11 @@ const Partner = () => {
       responsive: true,
     });
 
-    // Remove previous handlers
+    // Remove previous event handlers
     $(tableRef.current).off("click", ".edit-btn");
     $(tableRef.current).off("click", ".delete-btn");
 
-    // Event Handlers
+    // Add handlers
     $(tableRef.current).on("click", ".edit-btn", function () {
       const data = dataTableInstance.current.row($(this).closest("tr")).data();
       openEditModal(data);
@@ -116,33 +145,9 @@ const Partner = () => {
       const data = dataTableInstance.current.row($(this).closest("tr")).data();
       deletePartner(data.id);
     });
-  }, [partners]);
+  }, [partners, deletePartner]);
 
-  const deletePartner = async (user_id) => {
-    const confirmed = await MySwal.fire({
-      title: "Are you sure?",
-      text: "This user will be permanently deleted!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, delete it!",
-    });
-
-    if (!confirmed.isConfirmed) return;
-
-    try {
-      await axios.post(
-        "https://site2demo.in/marriageapp/api/user-delete",
-        { user_id },
-        { headers: { Accept: "application/json" } }
-      );
-      toast.success("User deleted successfully!");
-      await fetchPartners();
-    } catch (error) {
-      console.error("Delete failed:", error);
-      toast.error("Failed to delete user.");
-    }
-  };
-
+  // ✅ Edit Modal Handlers
   const openEditModal = (partner) => {
     setEditData({
       user_id: partner.id,
@@ -226,7 +231,7 @@ const Partner = () => {
         </div>
       </div>
 
-      {/* Edit Modal */}
+      {/* ✅ Edit Modal */}
       {isEditOpen && (
         <div
           className="modal fade show"

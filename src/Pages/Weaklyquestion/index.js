@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,11 +17,11 @@ const Weaklyquestion = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  const USER_ID = localStorage.getItem("user_id") || "1"; // fallback for demo
+  const USER_ID = localStorage.getItem("user_id") || "1";
   const isAdmin = true;
 
-  // Fetch questions
-  const fetchQuestions = async () => {
+  // ✅ Wrapped fetchQuestions in useCallback (fixes ESLint warning)
+  const fetchQuestions = useCallback(async () => {
     try {
       const formData = new FormData();
       formData.append("user_id", USER_ID);
@@ -48,27 +48,25 @@ const Weaklyquestion = () => {
       console.error("Error fetching questions:", error);
       toast.error("Something went wrong while loading questions");
     }
-  };
+  }, [USER_ID]); // dependency fixed ✅
 
+  // ✅ Call once on mount
   useEffect(() => {
     fetchQuestions();
-  }, []);
+  }, [fetchQuestions]); // dependency fixed ✅
 
-  // Open modal
   const openModal = () => {
     const modalEl = document.getElementById("questionModal");
     const modal = new Modal(modalEl);
     modal.show();
   };
 
-  // Close modal
   const closeModal = () => {
     const modalEl = document.getElementById("questionModal");
     const modal = Modal.getInstance(modalEl);
     if (modal) modal.hide();
   };
 
-  // Add new question
   const handleAddNew = () => {
     setNewQuestion("");
     setNewStatus("active");
@@ -76,7 +74,6 @@ const Weaklyquestion = () => {
     openModal();
   };
 
-  // Edit question
   const handleEdit = (q) => {
     setNewQuestion(q.text);
     setNewStatus(q.status.toLowerCase());
@@ -84,13 +81,13 @@ const Weaklyquestion = () => {
     openModal();
   };
 
-  // Save question
   const handleSaveQuestion = async (e) => {
     e.preventDefault();
     if (!newQuestion.trim()) {
       toast.warn("Question cannot be empty");
       return;
     }
+
     setLoading(true);
     try {
       const formData = new FormData();
@@ -125,7 +122,6 @@ const Weaklyquestion = () => {
     }
   };
 
-  // Delete question
   const handleDelete = async (id) => {
     const confirm = await Swal.fire({
       title: "Confirm deletion",
@@ -165,7 +161,6 @@ const Weaklyquestion = () => {
     }
   };
 
-  // Search and pagination
   const filteredQuestions = questions.filter((q) =>
     q.text.toLowerCase().includes(searchQuery.toLowerCase())
   );
