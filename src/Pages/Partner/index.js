@@ -191,7 +191,7 @@ const Partner = () => {
       });
 
       const response = await axios.post(
-        "https://site2demo.in/marriageapp/api/profile-update",
+        "https://site2demo.in/marriageapp/api/admin-profile-update",
         formData,
         {
           headers: {
@@ -348,7 +348,7 @@ const Partner = () => {
                         onChange={handleInputChange}
                       />
                     </div>
-                    <div className="col-md-6">
+                    {/* <div className="col-md-6">
                       <label className="form-label">Confirm Password</label>
                       <input
                         type="password"
@@ -357,7 +357,7 @@ const Partner = () => {
                         value={editData.password_confirm}
                         onChange={handleInputChange}
                       />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 

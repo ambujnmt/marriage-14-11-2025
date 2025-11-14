@@ -31,9 +31,11 @@ const Weaklyrating = () => {
         setFilteredData(result.data);
       } else {
         console.error("API Error:", result.message);
+        Swal.fire("Error", result.message, "error");
       }
     } catch (error) {
       console.error("Fetch Error:", error);
+      Swal.fire("Error", "An error occurred while fetching data.", "error");
     } finally {
       setLoading(false);
     }
@@ -181,7 +183,7 @@ const Weaklyrating = () => {
                 </button>
               </li>
 
-              {[...Array(totalPages || 1)].map((_, index) => (
+              {[...Array(totalPages)].map((_, index) => (
                 <li
                   key={index}
                   className={`page-item ${page === index + 1 ? "active" : ""}`}

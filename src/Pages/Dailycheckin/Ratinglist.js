@@ -87,20 +87,19 @@ const RatingList = () => {
     }
   };
 
-  const handleEdit = (id) => {
-    Swal.fire("Info", `Edit function called for rating ID: ${id}`, "info");
-  };
-
   const handleSearch = (e) => {
     const keyword = e.target.value.toLowerCase();
     setSearch(keyword);
     setPage(1);
+
     if (!keyword) return setFilteredData(data);
+
     const filtered = data.filter(
       (item) =>
         item.user_name.toLowerCase().includes(keyword) ||
         item.feedback.toLowerCase().includes(keyword)
     );
+
     setFilteredData(filtered);
   };
 
@@ -152,12 +151,6 @@ const RatingList = () => {
                     <td>{formatDate(item.created_at)}</td>
                     <td>
                       <button
-                        className="btn btn-sm btn-info me-2"
-                        onClick={() => handleEdit(item.id)}
-                      >
-                        Edit
-                      </button>
-                      <button
                         className="btn btn-sm btn-danger"
                         onClick={() => handleDelete(item.id)}
                       >
@@ -170,7 +163,7 @@ const RatingList = () => {
             </table>
           </div>
 
-          {/* ✅ Bootstrap Pagination */}
+          {/* Pagination */}
           <nav className="d-flex justify-content-center mt-3">
             <ul className="pagination">
               <li className={`page-item ${page === 1 ? "disabled" : ""}`}>

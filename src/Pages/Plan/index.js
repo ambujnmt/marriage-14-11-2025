@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -26,8 +26,8 @@ const Plan = () => {
     price: "",
   });
 
-  // Fetch all plans
-  const fetchPlans = async () => {
+  // FIXED: Added LIST_URL as dependency (warning resolved)
+  const fetchPlans = useCallback(async () => {
     try {
       setLoading(true);
       const res = await axios.get(LIST_URL);
@@ -36,59 +36,47 @@ const Plan = () => {
         : res.data?.data || res.data?.results || [];
       setPlans(data);
     } catch (err) {
-      console.error(err);
+      console.error("Error fetching plans:", err);
       toast.error("Failed to load plans");
       setPlans([]);
     } finally {
       setLoading(false);
     }
-  };
+  }, [LIST_URL]);
 
   useEffect(() => {
     fetchPlans();
-  }, []);
+  }, [fetchPlans]);
 
-  // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Submit create or update
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
       const url = modalType === "create" ? CREATE_URL : UPDATE_URL;
       const payload =
         modalType === "create"
           ? formData
-          : { plan_id: selectedPlan?.id, ...formData };
+          : { plan_id: selectedPlan.id, ...formData };
 
-      const res = await axios.post(url, payload);
-
-      if (!res.data?.status) {
-        toast.error(res.data?.message || "Failed to save plan");
-        return;
-      }
+      await axios.post(url, payload);
+      setShowModal(false);
+      setFormData({ name: "", duration_days: "", price: "" });
+      fetchPlans();
 
       toast.success(
         modalType === "create"
           ? "Plan created successfully!"
           : "Plan updated successfully!"
       );
-
-      setShowModal(false);
-      setFormData({ name: "", duration_days: "", price: "" });
-      fetchPlans();
     } catch (err) {
-      console.error(err);
+      console.error("Error saving plan:", err);
       toast.error("Something went wrong!");
-    } finally {
-      setLoading(false);
     }
   };
 
-  // Delete plan
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -101,42 +89,37 @@ const Plan = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await axios.post(DELETE_URL, { plan_id: id });
-          if (!res.data?.status) {
-            toast.error(res.data?.message || "Failed to delete plan");
-            return;
-          }
-          toast.success("Plan deleted successfully!");
+          await axios.post(DELETE_URL, { plan_id: id });
           fetchPlans();
+          Swal.fire("Deleted!", "Plan has been deleted.", "success");
         } catch (err) {
-          console.error(err);
+          console.error("Error deleting plan:", err);
           Swal.fire("Error!", "Failed to delete plan.", "error");
         }
       }
     });
   };
 
-  // Filter and paginate plans
   const filteredPlans = plans.filter((p) =>
     p.name?.toLowerCase().includes(search.toLowerCase())
   );
-  const itemsPerPage = 5;
-  const totalPages = Math.ceil(filteredPlans.length / itemsPerPage);
+
+  const itemsPerPage = 50;
   const paginatedPlans = filteredPlans.slice(
     (page - 1) * itemsPerPage,
     page * itemsPerPage
   );
+  const totalPages = Math.ceil(filteredPlans.length / itemsPerPage);
 
-  // Open modal
   const openModal = (type, plan = null) => {
     setModalType(type);
     setSelectedPlan(plan);
 
     if (type === "edit" && plan) {
       setFormData({
-        name: plan.name || "",
-        duration_days: plan.duration_days || "",
-        price: plan.price || "",
+        name: plan.name,
+        duration_days: plan.duration_days,
+        price: plan.price,
       });
     } else {
       setFormData({ name: "", duration_days: "", price: "" });
@@ -163,10 +146,7 @@ const Plan = () => {
           className="form-control form-control-sm"
           style={{ width: "250px" }}
           value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setPage(1);
-          }}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
@@ -226,7 +206,10 @@ const Plan = () => {
         <nav>
           <ul className="pagination justify-content-center">
             {[...Array(totalPages)].map((_, i) => (
-              <li key={i} className={`page-item ${page === i + 1 ? "active" : ""}`}>
+              <li
+                key={i}
+                className={`page-item ${page === i + 1 ? "active" : ""}`}
+              >
                 <button
                   className="page-link"
                   onClick={() => setPage(i + 1)}
@@ -240,12 +223,14 @@ const Plan = () => {
         </nav>
       )}
 
-      {/* Modal */}
       {showModal && (
         <div
           className="modal fade show"
           tabIndex="-1"
-          style={{ display: "block", backgroundColor: "rgba(0,0,0,0.5)" }}
+          style={{
+            display: "block",
+            backgroundColor: "rgba(0,0,0,0.5)",
+          }}
         >
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content shadow">
@@ -260,6 +245,7 @@ const Plan = () => {
                     onClick={() => setShowModal(false)}
                   ></button>
                 </div>
+
                 <div className="modal-body">
                   <div className="mb-3">
                     <label className="form-label">Name</label>
@@ -273,6 +259,7 @@ const Plan = () => {
                       required
                     />
                   </div>
+
                   <div className="mb-3">
                     <label className="form-label">Duration (Days)</label>
                     <input
@@ -283,9 +270,9 @@ const Plan = () => {
                       className="form-control"
                       placeholder="Enter duration"
                       required
-                      min="1"
                     />
                   </div>
+
                   <div className="mb-3">
                     <label className="form-label">Price</label>
                     <input
@@ -296,10 +283,10 @@ const Plan = () => {
                       className="form-control"
                       placeholder="Enter price"
                       required
-                      min="0"
                     />
                   </div>
                 </div>
+
                 <div className="modal-footer">
                   <button
                     type="button"
@@ -308,7 +295,7 @@ const Plan = () => {
                   >
                     Close
                   </button>
-                  <button type="submit" className="btn btn-success" disabled={loading}>
+                  <button type="submit" className="btn btn-success">
                     {modalType === "create" ? "Save" : "Update"}
                   </button>
                 </div>

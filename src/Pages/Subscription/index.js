@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import dayjs from 'dayjs';  // For date formatting
+import dayjs from 'dayjs';  
+import Swal from 'sweetalert2';  
 
 const Subscription = () => {
     const url = "https://site2demo.in/marriageapp/api/purchase-admin-list";
+    const deleteUrl = "https://site2demo.in/marriageapp/api/subscription-delete"; 
 
     const [subscriptions, setSubscriptions] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -45,6 +47,37 @@ const Subscription = () => {
 
     const totalPages = Math.ceil(filteredSubscriptions.length / itemsPerPage);
 
+    const handleDelete = async (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to recover this subscription!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Yes, delete it!',
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await axios.post(deleteUrl, { id }, {
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.data.status) {
+                        // Remove the deleted subscription from the state
+                        setSubscriptions(subscriptions.filter(subscription => subscription.id !== id));
+                        Swal.fire('Deleted!', 'Subscription has been deleted.', 'success');
+                    } else {
+                        Swal.fire('Failed!', 'Could not delete the subscription.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Error deleting subscription:', error);
+                    Swal.fire('Error!', 'There was an issue deleting the subscription.', 'error');
+                }
+            }
+        });
+    };
+
     return (
         <div className="container mt-5">
             <h2 className="mb-4">Subscription List</h2>
@@ -80,6 +113,7 @@ const Subscription = () => {
                                 <th>Status</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -92,6 +126,14 @@ const Subscription = () => {
                                     <td>{subscription.status}</td>
                                     <td>{dayjs(subscription.start_date).format('D MMM YYYY')}</td>
                                     <td>{dayjs(subscription.end_date).format('D MMM YYYY')}</td>
+                                    <td>
+                                        <button
+                                            className="btn btn-danger btn-sm"
+                                            onClick={() => handleDelete(subscription.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
