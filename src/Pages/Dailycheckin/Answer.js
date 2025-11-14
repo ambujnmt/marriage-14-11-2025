@@ -18,7 +18,7 @@ const Answer = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  // ✅ Fetch all answers initially (wrapped in useCallback)
+  // Fetch all answers initially (wrapped in useCallback)
   const fetchAnswers = useCallback(async () => {
     setLoading(true);
     try {
@@ -42,27 +42,20 @@ const Answer = () => {
     fetchAnswers();
   }, [fetchAnswers]);
 
-  // ✅ Search functionality
-  const handleSearch = useCallback(
-    (query) => {
-      setSearchQuery(query);
-      const filtered = answers.filter(
-        (a) =>
-          a.answer?.toLowerCase().includes(query.toLowerCase()) ||
-          a.question?.question?.toLowerCase().includes(query.toLowerCase()) ||
-          a.user?.first_name?.toLowerCase().includes(query.toLowerCase())
-      );
-      setFilteredAnswers(filtered);
-      setCurrentPage(1);
-    },
-    [answers]
-  );
+  // Handle search query and filter answers
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    const filtered = answers.filter(
+      (a) =>
+        a.answer?.toLowerCase().includes(query.toLowerCase()) ||
+        a.question?.question?.toLowerCase().includes(query.toLowerCase()) ||
+        a.user?.first_name?.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredAnswers(filtered);
+    setCurrentPage(1); // Reset to the first page when searching
+  };
 
-  useEffect(() => {
-    handleSearch(searchQuery);
-  }, [answers, searchQuery, handleSearch]);
-
-  // ✅ Delete answer
+  // Handle delete answer
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -98,7 +91,7 @@ const Answer = () => {
     });
   };
 
-  // ✅ Edit & View answer
+  // Handle Edit & View answer
   const handleEdit = (answer) => {
     setEditAnswer(answer);
     setNewAnswerText(answer.answer);
@@ -151,7 +144,7 @@ const Answer = () => {
     setNewAnswerText("");
   };
 
-  // ✅ Pagination
+  // Pagination
   const indexOfLast = currentPage * itemsPerPage;
   const currentAnswers = filteredAnswers.slice(
     indexOfLast - itemsPerPage,

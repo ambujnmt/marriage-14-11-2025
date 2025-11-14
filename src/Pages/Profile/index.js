@@ -18,6 +18,7 @@ const Profile = () => {
         image_url: '',
     });
 
+    // Fetch profile data on component mount
     useEffect(() => {
         if (!storedUserId) {
             Swal.fire('Error', 'User not logged in. Please login first.', 'error');
@@ -53,11 +54,13 @@ const Profile = () => {
             });
     }, [storedUserId]);
 
+    // Handle form input change
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setProfileData(prev => ({ ...prev, [name]: value }));
     };
 
+    // Handle image change
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -68,6 +71,7 @@ const Profile = () => {
         }
     };
 
+    // Handle form submission for profile update
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -84,7 +88,7 @@ const Profile = () => {
             if (profileData.image_file) formData.append('upload_photo', profileData.image_file);
 
             const response = await axios.post(
-                'https://site2demo.in/marriageapp/api/profile-update',
+                'https://site2demo.in/marriageapp/api/admin-profile-update',
                 formData,
                 { headers: { 'Content-Type': 'multipart/form-data' } }
             );

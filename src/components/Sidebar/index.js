@@ -10,9 +10,7 @@ import {
   BiArchive,
   BiSolidMegaphone,
   BiFile,
-  BiCog,
-  BiChevronRight,
-  BiChevronLeft,
+  BiCog
 } from "react-icons/bi";
 import { AiOutlineLogout } from "react-icons/ai";
 import defaultUser from "../../assets/images/logoapp.png";
@@ -48,7 +46,6 @@ const Sidebar = ({ collapsed, setCollapsed, handleLogout }) => {
     { to: "/daily-rating-list", icon: <BiFile />, label: "Daily Rating" },
     { to: "/weakly-rating-list", icon: <BiFile />, label: "Weekly Rating" },
     { to: "/plan-list", icon: <BiFile />, label: "Plans Management" },
-
     { to: "/subscription-list", icon: <BiFile />, label: "Subscription Plans" },
     { to: "/settings/profile", icon: <BiCog />, label: "Profile Settings" },
   ];
@@ -77,18 +74,6 @@ const Sidebar = ({ collapsed, setCollapsed, handleLogout }) => {
           </li>
         ))}
       </ul>
-
-      {/* Collapse Button */}
-
-      <div className="text-center border-top py-2">
-        {/* <button
-          className="btn btn-light w-100 d-flex align-items-center justify-content-center gap-2"
-          onClick={() => setCollapsed(!collapsed)}
-        >
-          {collapsed ? <BiChevronRight /> : <BiChevronLeft />} {!collapsed && "Collapse"}
-        </button> */}
-      </div>
-      
 
       {/* Logout */}
       <div className="p-3 border-top">
